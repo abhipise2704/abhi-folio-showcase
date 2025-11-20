@@ -915,8 +915,8 @@ section:nth-child(even) {
 
 .certification-badge {
     flex-shrink: 0;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     background: transparent;
     border-radius: 12px;
     padding: 0.5rem;
