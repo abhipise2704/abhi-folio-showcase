@@ -913,20 +913,19 @@ section:nth-child(even) {
 
 .certification-badge {
     flex-shrink: 0;
-    width: 80px;
-    height: 80px;
-    background: white;
+    width: 120px;
+    height: 120px;
+    background: transparent;
     border-radius: 12px;
-    padding: 1rem;
+    padding: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: var(--transition-base);
 }
 
 .certification-card:hover .certification-badge {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.05);
 }
 
 .certification-badge img {
@@ -934,6 +933,7 @@ section:nth-child(even) {
     height: 100%;
     object-fit: contain;
     opacity: 1;
+    display: block;
 }
 
 .certification-info {
@@ -1199,6 +1199,12 @@ section:nth-child(even) {
         flex-direction: column;
         text-align: center;
         align-items: center;
+    }
+
+    .certification-badge {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 1rem;
     }
 }
 
