@@ -436,12 +436,24 @@ const imageObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const img = entry.target;
-            img.style.opacity = '0';
-            img.style.transition = 'opacity 0.5s ease-in';
             
-            img.addEventListener('load', () => {
+            // Check if image is already loaded (from cache)
+            if (img.complete && img.naturalHeight !== 0) {
                 img.style.opacity = '1';
-            });
+                img.style.transition = 'opacity 0.5s ease-in';
+            } else {
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.5s ease-in';
+                
+                img.addEventListener('load', () => {
+                    img.style.opacity = '1';
+                });
+                
+                // Fallback: if load event doesn't fire, still show the image
+                img.addEventListener('error', () => {
+                    img.style.opacity = '1';
+                });
+            }
             
             imageObserver.unobserve(img);
         }
@@ -449,7 +461,12 @@ const imageObserver = new IntersectionObserver((entries) => {
 });
 
 images.forEach(img => {
-    imageObserver.observe(img);
+    // If image is already loaded before observer is set up, show it immediately
+    if (img.complete && img.naturalHeight !== 0) {
+        img.style.opacity = '1';
+    } else {
+        imageObserver.observe(img);
+    }
 });
 
 // ============================================
